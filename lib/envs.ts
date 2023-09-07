@@ -1,0 +1,1 @@
+export const MONGODB_URI = `mongodb+srv://${process.env.NEXT_PUBLIC_MONGODB_USERNAME}:${process.env.NEXT_PUBLIC_MONGODB_PASSWORD}@${process.env.NEXT_PUBLIC_MONGODB_CLUSTER_NAME}.${process.env.NEXT_PUBLIC_MONGODB_CLUSTER_ID}.mongodb.net/?retryWrites=true&w=majority` 
