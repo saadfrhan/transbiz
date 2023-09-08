@@ -144,6 +144,7 @@ export default function Page() {
             consignments.map((consignment, index) => (
               <div
                 className="flex items-center gap-5 w-fit"
+                key={index}
               >
                 <div
                   className="flex flex-col gap-2"

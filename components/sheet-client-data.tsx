@@ -142,7 +142,7 @@ export function SheetClientData({
               Consignments
             </P>
             {client.consignments.map((consignment, index) => (
-              <p>
+              <p key={index}>
                 {index + 1}. {consignment}
               </p>
             ))}
@@ -221,6 +221,7 @@ export function SheetClientData({
                   consignments.map((consignment, index) => (
                     <div
                       className="flex items-center gap-5 w-fit"
+                      key={index}
                     >
                       <div
                         className="flex flex-col gap-2"
