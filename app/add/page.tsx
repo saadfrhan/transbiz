@@ -11,7 +11,7 @@ import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "@/server-actions/create-client";
 import ErrorThrower from "@/components/error-thrower";
-
+import { redirect } from 'next/navigation';
 export default function Page() {
 
   const [name, setName] = useState('');
@@ -47,6 +47,7 @@ export default function Page() {
         },
         consignments
       });
+      redirect('/');
     } catch (error) {
       setError(
         JSON.stringify((error as Error), null, 2)
