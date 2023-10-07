@@ -35,6 +35,10 @@ async function getClients(
   }
 }
 
+export const metadata = {
+  title: 'Joined Ventures'
+}
+
 export default async function Page(
   { searchParams: { page, search } }: { searchParams: { page: number, search: string } }
 ) {
@@ -52,7 +56,7 @@ export default async function Page(
       <div
         className="flex w-full justify-between pt-5 max-lg:pt-2.5 pr-2.5"
       >
-        <H2 className="mx-2">Clients</H2>
+        <H2 className="mx-2">Joined Ventures</H2>
         <Link href="/add" className={buttonVariants({
           size: 'icon'
         })}>
