@@ -29,13 +29,13 @@ const NavItem: React.FC<NavItem> = ({ href, Icon, label }) => (
 
 export default function Navbar() {
     const jvItems = [
-        { href: "/joined-ventures", Icon: HeartHandshake, label: "View JVs" },
-        { href: "/joined-ventures/add", Icon: Plus, label: "Add a JV" },
+        { href: "/dashboard/joined-ventures", Icon: HeartHandshake, label: "View JVs" },
+        { href: "/dashboard/joined-ventures/add", Icon: Plus, label: "Add a JV" },
     ];
 
     const clientItems = [
-        { href: "/clients", Icon: User, label: "View Clients" },
-        { href: "/clients/add", Icon: Plus, label: "Add a Client" },
+        { href: "/dashboard/clients", Icon: User, label: "View Clients" },
+        { href: "/dashboard/clients/add", Icon: Plus, label: "Add a Client" },
     ];
 
     return (
