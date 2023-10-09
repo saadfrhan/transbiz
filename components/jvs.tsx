@@ -31,13 +31,13 @@ export default function JournalVoucherTable(
           {jvs.map((jv) => (
             <tr key={jv._id}>
               <td className="border-b px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                {jv.name}
+                {/* {jv.name} */}
               </td>
               <td className="border-b px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right max-md:hidden">
                 {format(new Date(jv.createdAt), "dd/MM/yyyy")}
               </td>
               <td className="border-b px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right max-md:hidden">
-                Rs. {new Intl.NumberFormat('en-PK').format(jv.amount)}
+                {/* Rs. {new Intl.NumberFormat('en-PK').format(jv.amount)} */}
               </td>
               <td align="right" className="border-b px-4 py-2">
                 <SheetJVData jv={jv}>
