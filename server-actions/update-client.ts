@@ -1,16 +1,16 @@
 "use server";
 
 import dbConnect from '@/lib/db';
-import client, { IClient } from '@/lib/models/client';
+import JournalVoucher, { IJournalVoucher } from '@/lib/models/journal-voucher';
 import { revalidatePath } from 'next/cache';
 
-export async function updateClient(id: string, data: IClient) {
+export async function updateClient(id: string, data: IJournalVoucher) {
 	try {
 		await dbConnect();
-		await client.updateOne({ _id: id }, data);
+		await JournalVoucher.updateOne({ _id: id }, data);
 		revalidatePath('/');
 	} catch (error) {
 		console.log(error);
-		throw new Error("Error in updating client.")
+		throw new Error("Error in updating JournalVoucher.")
 	}
 }

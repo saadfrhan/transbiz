@@ -1,17 +1,15 @@
 "use server";
 
 import dbConnect from "@/lib/db";
-import client from "@/lib/models/client";
+import JournalVoucher, { IJournalVoucher } from "@/lib/models/journal-voucher";
 import { revalidatePath } from "next/cache";
 
-export async function deleteClient(
-  id: string
+export async function createJV(
+  data: IJournalVoucher,
 ) {
   try {
 		await dbConnect();
-		await client.deleteOne({
-      _id: id
-    });
+		await JournalVoucher.create(data);
 		revalidatePath('/');
 	} catch (error) {
 		console.log(error)

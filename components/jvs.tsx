@@ -1,13 +1,13 @@
-import { IClient } from "@/lib/models/client"
+import { IJournalVoucher } from "@/lib/models/journal-voucher"
 import { format } from "date-fns";
 import { InfoIcon } from "lucide-react";
-import { SheetClientData } from "./sheet-client-data";
+import { SheetJVData } from "./sheet-jv-data";
 import { Button } from "./ui/button";
 
-export default function ClientsTable(
+export default function JournalVoucherTable(
   {
-    clients
-  }:{clients: IClient[]}
+    jvs
+  }: { jvs: IJournalVoucher[] }
 ) {
   return (
     <div className="my-6 w-full overflow-x-auto">
@@ -28,23 +28,23 @@ export default function ClientsTable(
           </tr>
         </thead>
         <tbody>
-          {clients.map((client) => (
-            <tr key={client._id}>
+          {jvs.map((jv) => (
+            <tr key={jv._id}>
               <td className="border-b px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                {client.name}
+                {/* {jv.name} */}
               </td>
               <td className="border-b px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right max-md:hidden">
-                {format(new Date(client.createdAt), "dd/MM/yyyy")}
+                {format(new Date(jv.createdAt), "dd/MM/yyyy")}
               </td>
               <td className="border-b px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right max-md:hidden">
-              Rs. {new Intl.NumberFormat('en-PK').format(client.amount)}
+                {/* Rs. {new Intl.NumberFormat('en-PK').format(jv.amount)} */}
               </td>
               <td align="right" className="border-b px-4 py-2">
-                <SheetClientData client={client}>
-                <Button size="icon" variant="ghost">
-                <InfoIcon className="w-4 h-4" />
-                </Button>
-                </SheetClientData>
+                <SheetJVData jv={jv}>
+                  <Button size="icon" variant="ghost">
+                    <InfoIcon className="w-4 h-4" />
+                  </Button>
+                </SheetJVData>
               </td>
             </tr>
           ))}

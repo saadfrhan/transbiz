@@ -2,12 +2,12 @@ import Navbar from '@/components/layout/navbar'
 import Statusbar from '@/components/status-bar'
 import ThemeToggler from '@/components/theme-toggler'
 import dbConnect from '@/lib/db'
-import client from '@/lib/models/client'
+import JournalVoucher from '@/lib/models/journal-voucher'
 import { UserButton } from '@clerk/nextjs'
 
-async function countClients() {
+async function countJVs() {
     await dbConnect();
-    return client.countDocuments({})
+    return JournalVoucher.countDocuments({})
 }
 
 export default async function Layout(
@@ -15,7 +15,7 @@ export default async function Layout(
         { children: React.ReactNode }
 ) {
 
-    const clients_count = await countClients();
+    const jvs_count = await countJVs();
 
     return (
         <div>
@@ -33,7 +33,7 @@ export default async function Layout(
                 }} />
             </div>
             {children}
-            <Statusbar clients_count={clients_count} />
+            <Statusbar jvs_count={jvs_count} />
         </div>
     )
 }

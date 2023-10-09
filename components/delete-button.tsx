@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { Trash2Icon } from 'lucide-react'
-import { deleteClient } from '@/server-actions/delete-client';
+import { deleteClient } from '@/server-actions/delete-jv';
 import { toast } from 'react-hot-toast';
 
 export default function DeleteButton({
