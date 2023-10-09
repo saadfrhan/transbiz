@@ -1,8 +1,7 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-	title: "Signup - Transportation Dashboard",
-  description: "Signup to Transportation Dashboard",
+	title: "Sign Up",
 }
 
 export default function Layout(
