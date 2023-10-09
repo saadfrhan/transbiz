@@ -1,31 +1,31 @@
-import Clients from "@/components/clients";
+import JVs from "@/components/jvs";
 import Pagination from "@/components/pagination";
 import TableSearch from "@/components/table-search";
 import { buttonVariants } from "@/components/ui/button";
 import { H2 } from "@/components/ui/h2";
 import dbConnect from "@/lib/db";
-import client, { IClient } from "@/lib/models/client";
+import jv, { IJournalVoucher } from "@/lib/models/journal-voucher";
 import { PlusCircleIcon, PlusIcon } from "lucide-react";
 import Link from "next/link";
 
-async function getClients(
+async function getjvs(
   page: number = 1,
   documentsPerPage: number = 10,
   search?: {
-    "client.name": string;
+    "jv.name": string;
   } | {}
-): Promise<[IClient[] | undefined, number | undefined] | [string]> {
+): Promise<[IJournalVoucher[] | undefined, number | undefined] | [string]> {
   try {
     await dbConnect();
-    const clients = await client.find({}).lean().skip((page - 1) * documentsPerPage)
+    const jvs = await jv.find({}).lean().skip((page - 1) * documentsPerPage)
       .limit(documentsPerPage)
       .sort({ createdAt: -1 });
-    const totalDocumentCount = await client.countDocuments({});
+    const totalDocumentCount = await jv.countDocuments({});
     const totalPageCount = Math.ceil(totalDocumentCount / documentsPerPage);
-    const result = clients.map((client) => {
+    const result = jvs.map((jv) => {
       return {
-        ...client,
-        _id: client._id.toString(),
+        ...jv,
+        _id: jv._id.toString(),
       };
     });
     return [result, totalPageCount];
@@ -36,17 +36,17 @@ async function getClients(
 }
 
 export const metadata = {
-  title: 'Joined Ventures'
+  title: 'JVs'
 }
 
 export default async function Page(
   { searchParams: { page, search } }: { searchParams: { page: number, search: string } }
 ) {
-  const [result, totalPageCount] = await getClients(
+  const [result, totalPageCount] = await getjvs(
     page ? Number(page) : 1,
     10,
     search ? {
-      "client.name": {
+      "jv.name": {
         $regex: search,
       }
     } : {}
@@ -56,8 +56,8 @@ export default async function Page(
       <div
         className="flex w-full justify-between pt-5 max-lg:pt-2.5 pr-2.5"
       >
-        <H2 className="mx-2">Joined Ventures</H2>
-        <Link href="/add" className={buttonVariants({
+        <H2 className="mx-2">General Vouchers</H2>
+        <Link href="/journal-vouchers/add" className={buttonVariants({
           size: 'icon'
         })}>
           <PlusIcon className="h-4 w-4" />
@@ -67,7 +67,7 @@ export default async function Page(
         result && typeof result !== 'string' && result.length > 0
           ? <>
             <TableSearch />
-            <Clients clients={result} />
+            <JVs jvs={result} />
             <Pagination totalPageCount={totalPageCount ?? 0} currentPage={page} />
           </>
           : <div
@@ -82,7 +82,7 @@ export default async function Page(
               <p
                 className="text-xl font-semibold"
               >
-                No Clients
+                No JVs
               </p>
             </div>
           </div>

@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { IClient } from "@/lib/models/client"
+import { IJournalVoucher } from "@/lib/models/journal-voucher"
 import { Separator } from "./ui/separator"
 import { P } from "./ui/p"
 import DeleteButton from "./delete-button"
@@ -22,21 +22,21 @@ import ErrorThrower from "./error-thrower";
 import { updateClient } from "@/server-actions/update-client";
 import { toast } from "react-hot-toast";
 
-export function SheetClientData({
+export function SheetJVData({
   children,
-  client
+  jv
 }: {
   children: React.ReactNode
-  client: IClient
+  jv: IJournalVoucher
 }) {
 
   const [isUpdating, setIsUpdating] = useState(false);
-  const [name, setName] = useState(client.name);
-  const [createdAt, setCreatedAt] = useState(new Date(client.createdAt));
-  const [amount, setAmount] = useState(client.amount);
-  const [loading, setLoading] = useState(client.location.loading);
-  const [drop, setDrop] = useState(client.location.drop);
-  const [consignments, setConsignments] = useState(client.consignments);
+  const [name, setName] = useState(jv.name);
+  const [createdAt, setCreatedAt] = useState(new Date(jv.createdAt));
+  const [amount, setAmount] = useState(jv.amount);
+  const [loading, setLoading] = useState(jv.location.loading);
+  const [drop, setDrop] = useState(jv.location.drop);
+  const [consignments, setConsignments] = useState(jv.consignments);
   const [error, setError] = useState<
     string | null
   >(null);
@@ -55,7 +55,7 @@ export function SheetClientData({
     });
     try {
       await updateClient(
-        client._id!, {
+        jv._id!, {
         name,
         createdAt,
         amount,
@@ -80,7 +80,7 @@ export function SheetClientData({
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent className="overflow-auto">
+      <SheetContent className="overflow-auto space-y-4">
         {error && <ErrorThrower error={error} />}
 
         <SheetHeader className="text-left">
@@ -88,7 +88,7 @@ export function SheetClientData({
             {isUpdating && <Button size="icon" onClick={() => setIsUpdating(false)}>
               <ArrowLeftIcon className="w-4 h-4" />
             </Button>}
-            {!isUpdating ? client.name : 'Update the client'}</SheetTitle>
+            {!isUpdating ? jv.name : 'Update the client'}</SheetTitle>
         </SheetHeader>
         <Separator className="my-4" />
         {!isUpdating && <div
@@ -99,7 +99,7 @@ export function SheetClientData({
               Created at
             </p>
             <p className="text-muted-foreground">
-              {new Date(client.createdAt).toLocaleDateString()}
+              {new Date(jv.createdAt).toLocaleDateString()}
             </p>
           </div>
           <div className="grid grid-cols-2">
@@ -107,7 +107,7 @@ export function SheetClientData({
               Amount
             </p>
             <p className="text-muted-foreground">
-              Rs. {new Intl.NumberFormat('en-PK').format(client.amount)}
+              Rs. {new Intl.NumberFormat('en-PK').format(jv.amount)}
             </p>
           </div>
           <div
@@ -121,7 +121,7 @@ export function SheetClientData({
                 Loading location
               </p>
               <p className="text-muted-foreground">
-                {client.location.loading}
+                {jv.location.loading}
               </p>
             </div>
             <div className="grid grid-cols-2">
@@ -129,7 +129,7 @@ export function SheetClientData({
                 Drop location
               </p>
               <p className="text-muted-foreground">
-                {client.location.drop}
+                {jv.location.drop}
               </p>
             </div>
           </div>
@@ -141,7 +141,7 @@ export function SheetClientData({
             >
               Consignments
             </P>
-            {client.consignments.map((consignment, index) => (
+            {jv.consignments.map((consignment, index) => (
               <p key={index}>
                 {index + 1}. {consignment}
               </p>
@@ -274,17 +274,17 @@ export function SheetClientData({
               </Button>
             </div>
           </div>
-            <Button
-              type="submit"
-              className="w-full"
-            >
-              Update
-            </Button>
+          <Button
+            type="submit"
+            className="w-full"
+          >
+            Update
+          </Button>
         </form>}
         <Separator className="mb-4" />
         {!isUpdating && <div className="space-y-2">
           <SheetClose asChild>
-            <DeleteButton id={client._id!} />
+            <DeleteButton id={jv._id!} />
           </SheetClose>
           <Button className='w-full'
             onClick={() => setIsUpdating(true)}

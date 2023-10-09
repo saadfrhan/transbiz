@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 
 export default function Statusbar({
-    clients_count
+    jvs_count
 }: {
-    clients_count: number
+    jvs_count: number
 }) {
     const [isVisible, setIsVisible] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -33,8 +33,8 @@ export default function Statusbar({
                 }`}
         >
             <div className='flex gap-1'>
-                <h2 className=" font-semibold dark:text-white">Clients</h2>
-                <p className=" font-bold dark:text-white">{clients_count}</p>
+                <h2 className=" font-semibold dark:text-white">Journal Vouchers: </h2>
+                <p className=" font-bold dark:text-white">{jvs_count}</p>
             </div>
         </div>
     )
