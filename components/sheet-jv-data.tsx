@@ -147,6 +147,9 @@ export function SheetJVData({
             <div className="py-4">
               <p className="text-sm text-muted-foreground font-semibold">CONTAINER/CARGO</p>
               <div>
+                <strong>Gross Profit:</strong> {grossProfit}
+              </div>
+              <div>
                 <strong className="text-xs">Consignments:</strong>
                 {consignments.map((consignment, index) => (
                   <p key={index}>- {consignment}</p>
@@ -168,9 +171,7 @@ export function SheetJVData({
                   </div>
                 )}
               </div>
-              <div>
-                <strong>Gross Profit:</strong> {grossProfit}
-              </div>
+
             </div>
           </div>
         </div>}
