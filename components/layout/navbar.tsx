@@ -7,7 +7,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
-import { Folders, LucideIcon, Menu, Plus } from "lucide-react";
+import { Folders, Grid, LayoutDashboard, LucideIcon, Menu, Plus } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 
@@ -44,6 +44,9 @@ export default function Navbar() {
                 <SheetHeader className="text-left mb-7">
                     <SheetTitle className="text-sm text-muted-foreground">MENU</SheetTitle>
                 </SheetHeader>
+                <SheetClose asChild>
+                    <NavItem href="/dashboard" Icon={LayoutDashboard} label="Dashboard" />
+                </SheetClose>
                 <p className="text-sm text-muted-foreground font-semibold">JOURNAL VOUCHER</p>
                 {jvItems.map((item, index) => (
                     <SheetClose key={index} asChild className="flex flex-col gap-y-2">
