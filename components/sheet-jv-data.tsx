@@ -72,19 +72,19 @@ export function SheetJVData({
       </SheetTrigger>
       <SheetContent className="overflow-auto space-y-7">
 
-        {isUpdating && <SheetHeader className="text-left">
+        <SheetHeader className="text-left">
           <SheetTitle className="flex gap-4 items-center border-b-0">
-            <Button size="icon" onClick={() => setIsUpdating(false)}>
+            {isUpdating && <Button size="icon" onClick={() => setIsUpdating(false)}>
               <ArrowLeftIcon className="w-4 h-4" />
-            </Button>
+            </Button>}
+            <p className="mt-2">{isUpdating ? "Update Journal Voucher" : "Journal Voucher Details"}</p>
           </SheetTitle>
-        </SheetHeader>}
-        {isUpdating && <Separator className="my-4" />}
+        </SheetHeader>
+        <Separator />
         {!isUpdating && <div
-          className="py-4 flex flex-col gap-y-2"
+          className="flex flex-col gap-y-2"
         >
-          <div className="border p-4 rounded-lg shadow-md mt-12">
-            <h2 className="text-xl font-semibold mb-2">Journal Voucher Details</h2>
+          <div className="border p-4 rounded-lg shadow-md">
             <div className="border-b pb-4">
               <p className="text-sm text-muted-foreground font-semibold">PARTY</p>
               <p>
