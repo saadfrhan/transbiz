@@ -21,6 +21,22 @@ import { DatePicker } from "./ui/date-picker";
 import ErrorThrower from "./error-thrower";
 import { updateClient } from "@/server-actions/update-client";
 import { toast } from "react-hot-toast";
+import JVForm from "./jv-form";
+
+// export interface IJournalVoucher {
+//   _id?: string;
+//   party: IParty;
+//   createdAt: Date;
+//   updatedAt?: Date;
+//   sender: string;
+//   broker: IBroker;
+//   expenses: IExpenses;
+//   consignments: string[];
+//   moreEntries?: {
+//     [x: string]: any;
+//   }[]; // Adjust the type as needed for moreEntries
+//   grossProfit: number;
+// }
 
 export function SheetJVData({
   children,
@@ -31,256 +47,139 @@ export function SheetJVData({
 }) {
 
   const [isUpdating, setIsUpdating] = useState(false);
-  const [name, setName] = useState(jv.name);
-  const [createdAt, setCreatedAt] = useState(new Date(jv.createdAt));
-  const [amount, setAmount] = useState(jv.amount);
-  const [loading, setLoading] = useState(jv.location.loading);
-  const [drop, setDrop] = useState(jv.location.drop);
-  const [consignments, setConsignments] = useState(jv.consignments);
-  const [error, setError] = useState<
-    string | null
-  >(null);
 
-  async function onSubmit(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
-    e.preventDefault();
-    console.log({
-      name,
-      createdAt,
-      amount,
-      loading,
-      drop,
-      consignments
-    });
-    try {
-      await updateClient(
-        jv._id!, {
-        name,
-        createdAt,
-        amount,
-        location: {
-          loading,
-          drop,
-        },
-        consignments: consignments.filter((consignment) => consignment !== "")
-      });
-      setIsUpdating(false);
-      toast.success("Client updated successfully");
-    } catch (error) {
-      setError(
-        JSON.stringify((error as Error), null, 2)
-      );
-    }
-
-  }
+  const {
+    broker,
+    createdAt,
+    party,
+    sender,
+    consignments,
+    moreEntries,
+    grossProfit,
+    expenses: {
+      gate_pass,
+      go_down,
+      labour,
+      local,
+      other_expenses
+    },
+  } = jv;
 
   return (
     <Sheet>
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent className="overflow-auto space-y-4">
-        {error && <ErrorThrower error={error} />}
+      <SheetContent className="overflow-auto space-y-7">
 
-        <SheetHeader className="text-left">
-          <SheetTitle className="flex gap-4 items-center">
-            {isUpdating && <Button size="icon" onClick={() => setIsUpdating(false)}>
+        {isUpdating && <SheetHeader className="text-left">
+          <SheetTitle className="flex gap-4 items-center border-b-0">
+            <Button size="icon" onClick={() => setIsUpdating(false)}>
               <ArrowLeftIcon className="w-4 h-4" />
-            </Button>}
-            {!isUpdating ? jv.name : 'Update the client'}</SheetTitle>
-        </SheetHeader>
-        <Separator className="my-4" />
+            </Button>
+          </SheetTitle>
+        </SheetHeader>}
+        {isUpdating && <Separator className="my-4" />}
         {!isUpdating && <div
           className="py-4 flex flex-col gap-y-2"
         >
-          <div className="grid grid-cols-2">
-            <p>
-              Created at
-            </p>
-            <p className="text-muted-foreground">
-              {new Date(jv.createdAt).toLocaleDateString()}
-            </p>
-          </div>
-          <div className="grid grid-cols-2">
-            <p>
-              Amount
-            </p>
-            <p className="text-muted-foreground">
-              Rs. {new Intl.NumberFormat('en-PK').format(jv.amount)}
-            </p>
-          </div>
-          <div
-            className="space-y-2"
-          >
-            <P className="text-xl font-semibold">
-              Location
-            </P>
-            <div className="grid grid-cols-2">
+          <div className="border p-4 rounded-lg shadow-md mt-12">
+            <h2 className="text-xl font-semibold mb-2">Journal Voucher Details</h2>
+            <div className="border-b pb-4">
+              <p className="text-sm text-muted-foreground font-semibold">PARTY</p>
               <p>
-                Loading location
+                <strong>Name:</strong> {party.name}
               </p>
-              <p className="text-muted-foreground">
-                {jv.location.loading}
+              <p>
+                <strong>Billing Amount</strong> {party.billing_amount}
               </p>
             </div>
-            <div className="grid grid-cols-2">
+            <div className="border-b py-4">
               <p>
-                Drop location
+                <strong>Created At:</strong> {new Date(createdAt).toLocaleDateString()}
               </p>
-              <p className="text-muted-foreground">
-                {jv.location.drop}
+              <p>
+                <strong>Sender:</strong> {sender}
               </p>
             </div>
-          </div>
-          <div
-            className="space-y-2"
-          >
-            <P
-              className="text-xl font-semibold"
-            >
-              Consignments
-            </P>
-            {jv.consignments.map((consignment, index) => (
-              <p key={index}>
-                {index + 1}. {consignment}
+            <div className="py-4 border-b">
+              <p className="text-sm text-muted-foreground font-semibold">BROKER</p>
+              <p>
+                <strong>Broker Name:</strong> {broker.name}
               </p>
-            ))}
+              {/* Render other properties of broker */}
+              <p>
+                <strong>Vehicle Number:</strong> {broker.vehicle_number}
+              </p>
+              <p>
+                <strong>Funds Transfer:</strong> {broker.funds_transfer}
+              </p>
+              <p>
+                <strong>Withdrawal:</strong> {broker.withdrawal}
+              </p>
+            </div>
+            <div className="border-b py-4">
+              <p className="text-sm text-muted-foreground font-semibold">EXPENSES</p>
+
+              <p>
+                <strong>Gate Pass:</strong> {gate_pass}
+              </p>
+
+              <p>
+                <strong>Go Down:</strong> {go_down}
+              </p>
+
+              <p>
+                <strong>Labour:</strong> {labour}
+
+              </p>
+
+              <p>
+                <strong>Local:</strong> {local}
+              </p>
+
+              <p>
+                <strong>Other Expenses:</strong> {other_expenses}
+              </p>
+
+            </div>
+
+            <div className="py-4">
+              <p className="text-sm text-muted-foreground font-semibold">CONTAINER/CARGO</p>
+              <div>
+                <strong className="text-xs">Consignments:</strong>
+                {consignments.map((consignment, index) => (
+                  <p key={index}>- {consignment}</p>
+                ))}
+              </div>
+              <div>
+                <strong className="text-xs">Custom entries:</strong>
+                {moreEntries && moreEntries.length > 0 && (
+                  <div>
+                    {moreEntries.map((entry, index) => (
+                      <div key={index}>
+                        {Object.entries(entry).map(([key, value]) => (
+                          <p key={key}>
+                            <strong>{key}:</strong> {value}
+                          </p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div>
+                <strong>Gross Profit:</strong> {grossProfit}
+              </div>
+            </div>
           </div>
         </div>}
-        {isUpdating && <form className="space-y-4" onSubmit={onSubmit}>
-          <div className="flex flex-col gap-2 w-[280px]">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              value={name}
-              className="bg-muted"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2 w-[280px]">
-            <Label htmlFor="createdAt">Date</Label>
-            <DatePicker
 
-              date={createdAt}
-              setDate={setCreatedAt}
-            />
-          </div>
-          <div className="flex flex-col gap-2 w-[280px]">
-            <Label htmlFor="amount">Amount</Label>
-            <Input
-              id="amount"
-              name="amount"
-              className="bg-muted"
-              type="number"
-              value={
-                amount === 0 ? "" : amount
-              }
-              onChange={(e) => setAmount(Number(e.target.value))}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="loading">Loading location</Label>
-            <Input
-              className="bg-muted w-[280px]"
 
-              id="loading"
-              name="loading"
-              type="text"
-              value={loading}
-              onChange={(e) => setLoading(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="drop">Drop location</Label>
-            <Input
-              id="drop"
-              name="drop"
-              type="text"
-              value={drop}
-              className="bg-muted w-[280px]"
 
-              onChange={(e) => setDrop(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col gap-2 w-[280px]">
-            <Label htmlFor="consignments">Consignments</Label>
-            <div
-              className="
-              flex flex-col
-            "
-            >
-              <div
-                className="
-              flex flex-col gap-2
-            "
-              >
-                {
-                  consignments.map((consignment, index) => (
-                    <div
-                      className="flex items-center gap-5 w-fit"
-                      key={index}
-                    >
-                      <div
-                        className="flex flex-col gap-2"
-                      >
-                        <div
-                          className="flex items-center gap-4"
-                        >
-                          <P>{index + 1}.</P>
 
-                          <Input
-                            key={index}
-                            className="bg-muted"
 
-                            id={`consignments-${index}`}
-                            name={`consignments-${index}`}
-                            type="text"
-                            value={consignment}
-                            onChange={(e) => {
-                              const newConsignments = [...consignments]
-                              newConsignments[index] = e.target.value
-                              setConsignments(newConsignments)
-                            }}
-                          />
-                        </div>
-                        <p
-                          className="text-sm text-red-500 cursor-pointer"
-                          onClick={() => {
-                            const newConsignments = [...consignments]
-                            newConsignments.splice(index, 1)
-                            setConsignments(newConsignments)
-                          }}
-                        >
-                          remove
-                        </p>
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
-              <Button
-                variant="link"
-                className="text-sm w-fit p-0"
-                type="button"
-                onClick={() => {
-                  setConsignments([...consignments, ""])
-                }
-                }
-              >
-                Add consignment
-              </Button>
-            </div>
-          </div>
-          <Button
-            type="submit"
-            className="w-full"
-          >
-            Update
-          </Button>
-        </form>}
+        {isUpdating && <JVForm actionOnSubmit="update" defaultData={jv} />}
         <Separator className="mb-4" />
         {!isUpdating && <div className="space-y-2">
           <SheetClose asChild>

@@ -7,7 +7,7 @@ export interface ILocation {
 
 export interface IParty {
   name: string;
-  billing_amount: string;
+  billing_amount: number;
 }
 
 export interface IBroker {
@@ -36,7 +36,7 @@ export interface IJournalVoucher {
   consignments: string[];
   moreEntries?: {
     [x: string]: any;
-  }; // Adjust the type as needed for moreEntries
+  }[]; // Adjust the type as needed for moreEntries
   grossProfit: number;
 }
 
@@ -46,9 +46,9 @@ const partySchema: Schema = new Schema<IParty & Document>({
     required: true,
   },
   billing_amount: {
-    type: String,
+    type: Number,
     required: true,
-  }
+  },
 });
 
 const brokerSchema: Schema = new Schema<IBroker & Document>({
@@ -66,14 +66,14 @@ const brokerSchema: Schema = new Schema<IBroker & Document>({
   },
   withdrawal: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const expensesSchema = new Schema<IExpenses & Document>({
   labour: {
     type: Number,
-    required: true
+    required: true,
   },
   local: {
     type: Number,
@@ -81,59 +81,60 @@ const expensesSchema = new Schema<IExpenses & Document>({
   },
   gate_pass: {
     type: String,
-    required: true
+    required: true,
   },
   go_down: {
     type: Number,
-    required: true
+    required: true,
   },
   other_expenses: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 type JournalVoucherDocument = IJournalVoucher & Document;
 
-const journalVoucherSchema: Schema = new Schema<JournalVoucherDocument>(
-  {
-    party: {
-      type: partySchema,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      required: true,
-    },
-    updatedAt: {
-      type: Date,
-    },
-    sender: {
-      type: String,
-      required: true,
-    },
-    broker: {
-      type: brokerSchema,
-      required: true
-    },
-    expenses: {
-      type: expensesSchema,
-      required: true
-    },
-    consignments: {
-      type: [String],
-      required: true,
-    },
-    moreEntries: {
-      type: Schema.Types.Mixed
-    },
-    grossProfit: {
-      type: Number,
-      required: true
-    }
+const journalVoucherSchema: Schema = new Schema<JournalVoucherDocument>({
+  party: {
+    type: partySchema,
+    required: true,
   },
-);
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Date,
+  },
+  sender: {
+    type: String,
+    required: true,
+  },
+  broker: {
+    type: brokerSchema,
+    required: true,
+  },
+  expenses: {
+    type: expensesSchema,
+    required: true,
+  },
+  consignments: {
+    type: [String],
+    required: true,
+  },
+  moreEntries: {
+    type: Schema.Types.Mixed,
+  },
+  grossProfit: {
+    type: Number,
+    required: true,
+  },
+});
 
-export default (models as {
-  JournalVoucher: Model<JournalVoucherDocument>;
-}).JournalVoucher || model<JournalVoucherDocument>('JournalVoucher', journalVoucherSchema)
+export default (
+  models as {
+    JournalVoucher: Model<JournalVoucherDocument>;
+  }
+).JournalVoucher ||
+  model<JournalVoucherDocument>('JournalVoucher', journalVoucherSchema);
