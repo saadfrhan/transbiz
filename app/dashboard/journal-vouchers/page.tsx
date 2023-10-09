@@ -1,11 +1,12 @@
 import JVs from "@/components/jvs";
 import Pagination from "@/components/pagination";
+import Refresh from "@/components/refresh";
 import TableSearch from "@/components/table-search";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { H2 } from "@/components/ui/h2";
 import dbConnect from "@/lib/db";
 import jv, { IJournalVoucher } from "@/lib/models/journal-voucher";
-import { PlusCircleIcon, PlusIcon } from "lucide-react";
+import { PlusCircleIcon, PlusIcon, RefreshCw } from "lucide-react";
 import Link from "next/link";
 
 async function getjvs(
@@ -17,7 +18,9 @@ async function getjvs(
 ): Promise<[IJournalVoucher[] | undefined, number | undefined] | [string]> {
   try {
     await dbConnect();
-    const jvs = await jv.find({}).lean().skip((page - 1) * documentsPerPage)
+    const jvs = await jv.find(
+      search ?? {}
+    ).lean().skip((page - 1) * documentsPerPage)
       .limit(documentsPerPage)
       .sort({ createdAt: -1 });
     const totalDocumentCount = await jv.countDocuments({});
@@ -46,22 +49,30 @@ export default async function Page(
     page ? Number(page) : 1,
     10,
     search ? {
-      "jv.name": {
+      "party.name": {
         $regex: search,
       }
     } : {}
   )
+
   return (
     <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen">
       <div
-        className="flex w-full justify-between pt-5 max-lg:pt-2.5 pr-2.5"
+        className="flex w-full max-sm:flex-col justify-between pt-5 max-lg:pt-2.5 pr-2.5"
       >
         <H2 className="mx-2">General Vouchers</H2>
-        <Link href="/journal-vouchers/add" className={buttonVariants({
-          size: 'icon'
-        })}>
-          <PlusIcon className="h-4 w-4" />
-        </Link>
+        <div className="flex gap-2 self-end items-center">
+          <Link href="/dashboard/journal-vouchers/add" className={buttonVariants({
+            className: 'flex gap-2 w-fit'
+          })}>
+            <PlusIcon className="h-4 w-4" /> Add
+          </Link>
+          <Refresh>
+            <Button className="flex gap-2 w-fit">
+              <RefreshCw className="h-4 w-4" /> Refresh
+            </Button>
+          </Refresh>
+        </div>
       </div>
       {
         result && typeof result !== 'string' && result.length > 0
@@ -76,7 +87,7 @@ export default async function Page(
             <div
               className="flex flex-col justify-center items-center gap-4"
             >
-              <Link href="/add">
+              <Link href="/dashboard/journal-vouchers/add">
                 <PlusCircleIcon className="w-32 h-32 text-gray-400 cursor-pointer" />
               </Link>
               <p

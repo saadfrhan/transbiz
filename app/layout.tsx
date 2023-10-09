@@ -25,7 +25,10 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
             <Toaster
-              position='bottom-left'
+              position='bottom-center'
+              toastOptions={{
+                className: 'bg-background text-foreground border'
+              }}
             />
           </ThemeProvider>
         </ClerkProvider>
