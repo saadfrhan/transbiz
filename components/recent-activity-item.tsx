@@ -35,7 +35,7 @@ const RecentActivityItem = ({ activity }: { activity: IRecentActivity }) => {
                         />
                     </div>
                     <div>
-                        <p className="text-sm font-medium text-gray-900">{user?.name}</p>
+                        <p className="text-sm font-medium">{user?.name}</p>
                         <p className="text-sm text-gray-500">{user.email}</p>
                     </div>
                 </div>
@@ -43,7 +43,7 @@ const RecentActivityItem = ({ activity }: { activity: IRecentActivity }) => {
                     <div className="text-sm text-gray-500 mr-2">{getIcon()}</div>
                     <div className="text-sm text-gray-500">{objectName}</div>
                 </div>
-                <div className="text-sm text-gray-500 mt-2 sm:mt-0">
+                <div className="text-sm text-gray-500 flex items-center">
                     <Clock size={16} className="mr-1 inline" />
                     {formatDistance(new Date(timestamp), new Date(), {
                         addSuffix: true,
