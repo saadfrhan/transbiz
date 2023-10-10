@@ -32,9 +32,9 @@ export default async function Page() {
                 className="text-2xl font-bold"
             >{getGreeting()} {user?.firstName}!</p>
 
-            <div className="mt-2 mb-4 flex justify-between">
+            <div className="my-3 flex justify-between items-center">
                 <p
-                    className="text-xl font-medium"
+                    className="text-xl font-medium leading-none"
                 >
                     Activity log
                 </p>
