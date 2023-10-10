@@ -41,7 +41,7 @@ export default function Statusbar({
                 }`}
         >
             <div className='flex gap-2 items-center'>
-                <h2 className=" font-semibold">{getGreeting()} {
+                <h2 className="text-muted-foreground">{getGreeting()} {
                     user?.firstName
                 }! </h2>
                 <Refresh>

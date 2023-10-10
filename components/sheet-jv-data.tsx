@@ -70,7 +70,7 @@ export function SheetJVData({
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent className="overflow-auto">
+      <SheetContent className="overflow-auto max-sm:w-screen">
 
         <SheetHeader className="text-left">
           <SheetTitle className="flex gap-4 items-center">

@@ -15,10 +15,9 @@ const SheetTrigger = SheetPrimitive.Trigger
 const SheetClose = SheetPrimitive.Close
 
 const SheetPortal = ({
-  className,
   ...props
 }: SheetPrimitive.DialogPortalProps) => (
-  <SheetPrimitive.Portal className={cn(className)} {...props} />
+  <SheetPrimitive.Portal {...props} />
 )
 SheetPortal.displayName = SheetPrimitive.Portal.displayName
 
@@ -73,9 +72,11 @@ const SheetContent = React.forwardRef<
     >
       {children}
       <SheetPrimitive.Close className="absolute right-6 top-4">
-        <Button size="icon" variant="ghost">
-          <X className="h-4 w-4" />
+        <Button size="icon" variant="link" className="group relative">
+          <X className="h-8 w-8 transform rotate-0 group-hover:rotate-180 transition-transform duration-300 ease-in-out" />
         </Button>
+
+
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>
   </SheetPortal>

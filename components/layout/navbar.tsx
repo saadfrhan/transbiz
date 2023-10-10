@@ -41,19 +41,23 @@ export default function Navbar() {
                     <Menu className="w-4 h-4" />
                 </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="max-sm:w-screen space-y-4">
+            <SheetContent side="left" className="max-sm:w-screen">
                 <SheetHeader className="text-left mb-7">
                     <SheetTitle className="text-sm text-muted-foreground">MENU</SheetTitle>
                 </SheetHeader>
-                <SheetClose asChild className="flex flex-col gap-y-2">
-                    <NavItem href="/dashboard" Icon={LayoutDashboard} label="Dashboard" />
-                </SheetClose>
-                <p className="text-sm text-muted-foreground font-semibold">JOURNAL VOUCHER</p>
-                {jvItems.map((item, index) => (
-                    <SheetClose key={index} asChild className="flex flex-col gap-y-2">
-                        <NavItem {...item} />
+                <div className="flex flex-col gap-4">
+                    <SheetClose asChild className="flex flex-col gap-y-2">
+                        <NavItem href="/dashboard" Icon={LayoutDashboard} label="Dashboard" />
                     </SheetClose>
-                ))}
+                    <div className="flex flex-col gap-2">
+                        <p className="text-sm text-muted-foreground font-semibold">JOURNAL VOUCHER</p>
+                        {jvItems.map((item, index) => (
+                            <SheetClose key={index} asChild className="flex flex-col gap-y-2">
+                                <NavItem {...item} />
+                            </SheetClose>
+                        ))}
+                    </div>
+                </div>
             </SheetContent>
         </Sheet>
     );
