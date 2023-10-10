@@ -70,19 +70,20 @@ export function SheetJVData({
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
-      <SheetContent className="overflow-auto space-y-7">
+      <SheetContent className="overflow-auto">
 
         <SheetHeader className="text-left">
-          <SheetTitle className="flex gap-4 items-center border-b-0">
+          <SheetTitle className="flex gap-4 items-center">
             {isUpdating && <Button size="icon" onClick={() => setIsUpdating(false)}>
               <ArrowLeftIcon className="w-4 h-4" />
             </Button>}
-            <p className="mt-2">{isUpdating ? "Update Journal Voucher" : "Journal Voucher Details"}</p>
+
+            {isUpdating ? "Update Journal Voucher" : "Details"}
+
           </SheetTitle>
         </SheetHeader>
-        <Separator />
         {!isUpdating && <div
-          className="flex flex-col gap-y-2"
+          className="flex flex-col gap-y-2 py-4"
         >
           <div className="border p-4 rounded-lg shadow-md">
             <div className="border-b pb-4">
