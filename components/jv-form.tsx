@@ -161,7 +161,6 @@ export default function JVForm({
                 <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
                     <Label>Sender</Label>
                     <Input
-                        type="number"
                         required
                         value={sender}
                         onChange={(e) => setSender(e.target.value)}
