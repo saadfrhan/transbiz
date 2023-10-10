@@ -375,7 +375,7 @@ export default function JVForm({
                                             required
 
                                             type="text"
-                                            value={customEntry[Object.keys(customEntries)[index]]}
+                                            value={customEntries[index][Object.keys(customEntries[index])[0]]}
                                             onChange={(e) => {
                                                 const _customEntries = [...customEntries]
                                                 _customEntries[index][Object.keys(customEntries[index])[0]] = e.target.value

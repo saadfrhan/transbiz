@@ -71,8 +71,8 @@ const SheetContent = React.forwardRef<
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className="absolute right-6 top-4">
-        <Button size="icon" variant="link" className="group relative">
+      <SheetPrimitive.Close className="absolute right-6 top-6">
+        <Button size="icon" className="group relative">
           <X className="h-8 w-8 transform rotate-0 group-hover:rotate-180 transition-transform duration-300 ease-in-out" />
         </Button>
 

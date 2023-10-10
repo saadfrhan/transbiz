@@ -83,7 +83,7 @@ export function SheetJVData({
           </SheetTitle>
         </SheetHeader>
         {!isUpdating && <div
-          className="flex flex-col gap-y-2 py-4"
+          className="flex flex-col gap-y-2 py-6"
         >
           <div className="border p-4 rounded-lg shadow-md">
             <div className="border-b pb-4">
@@ -181,9 +181,11 @@ export function SheetJVData({
 
 
 
-        {isUpdating && <JVForm actionOnSubmit="update" defaultData={jv} />}
+        {isUpdating && <div className="py-3">
+          <JVForm actionOnSubmit="update" defaultData={jv} />
+        </div>}
         <Separator className="mb-4" />
-        {!isUpdating && <div className="space-y-2">
+        {!isUpdating && <div className="flex gap-2">
           <SheetClose asChild>
             <DeleteButton id={jv._id!} />
           </SheetClose>
