@@ -43,7 +43,7 @@ const RecentActivityItem = ({ activity }: { activity: IRecentActivity }) => {
                     <div className="text-sm text-gray-500 mr-2">{getIcon()}</div>
                     <div className="text-sm text-gray-500">{objectName}</div>
                 </div>
-                <div className="text-sm text-gray-500 flex items-center">
+                <div className="text-sm text-gray-500 flex items-center max-sm:pt-3">
                     <Clock size={16} className="mr-1 inline" />
                     {formatDistance(new Date(timestamp), new Date(), {
                         addSuffix: true,
