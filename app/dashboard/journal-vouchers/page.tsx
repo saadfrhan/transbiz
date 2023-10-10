@@ -61,7 +61,7 @@ export default async function Page(
         className="flex w-full max-sm:flex-col justify-between pt-5 max-lg:pt-2.5 pr-2.5"
       >
         <H2 className="mx-2">General Vouchers</H2>
-        <div className="flex gap-2 self-end items-center">
+        <div className="flex gap-2 self-end items-center max-sm:py-3">
           <Link href="/dashboard/journal-vouchers/add" className={buttonVariants({
             className: 'flex gap-2 w-fit'
           })}>
