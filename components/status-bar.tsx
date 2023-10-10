@@ -4,7 +4,7 @@ import { getGreeting } from '@/lib/utils';
 import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
 import Refresh from './refresh';
-import { Folders, Plus, RefreshCcw } from 'lucide-react';
+import { Folders, MessageCircle, Plus, RefreshCcw } from 'lucide-react';
 import Link from 'next/link';
 import { TooltipComponent } from './tooltip-component';
 
@@ -51,6 +51,17 @@ export default function Statusbar({
                 </Refresh>
             </div>
             <div className='flex gap-2 items-center'>
+                <TooltipComponent label='Feedback'>
+                    <a
+                        href="https://api.whatsapp.com/send?phone=923250679583"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <div className='flex gap-2 items-center text-muted-foreground hover:text-foreground duration-300'>
+                            <MessageCircle className='w-4 h-4' />
+                        </div>
+                    </a>
+                </TooltipComponent>
                 <TooltipComponent label={`
                     Journal Voucher: ${jvs_count}
                 `}>

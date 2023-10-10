@@ -42,10 +42,12 @@ export default function Navbar() {
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="max-sm:w-screen">
-                <SheetHeader className="text-left mb-10">
-                    <SheetTitle className="text-muted-foreground">MENU</SheetTitle>
+                <SheetHeader className="text-left">
+                    <SheetTitle className="flex gap-4 items-center">
+                        <h2 className="text-muted-foreground">Menu</h2>
+                    </SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mt-8">
                     <SheetClose asChild className="flex flex-col gap-y-2">
                         <NavItem href="/dashboard" Icon={LayoutDashboard} label="Dashboard" />
                     </SheetClose>
