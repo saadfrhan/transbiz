@@ -2,12 +2,10 @@ import RecentActivityItem from "@/components/recent-activity-item";
 import dbConnect from "@/lib/db"
 import RecentActivityModel from "@/lib/models/recent-activity";
 import { currentUser } from "@clerk/nextjs"
-
-import DeleteAllRecentActivity from "@/components/delete-all-recent-activity";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata = {
-    title: 'Dashboard'
+    title: 'Home'
 }
 
 async function getRecentActivity() {
@@ -55,12 +53,8 @@ export default async function Page() {
                         (deletes weekly)
                     </span>
                 </p>
-                <p>
-                </p>
-
-                {activities && activities?.length > 0 && <DeleteAllRecentActivity />}
             </div>
-            {activities && activities?.length > 0 ? <div>
+            {activities && activities?.length > 0 ?
                 <div
                     className="flex flex-col gap-2"
                 >
@@ -68,13 +62,13 @@ export default async function Page() {
                         <RecentActivityItem key={index} activity={activity} />
                     ))}
                 </div>
-            </div> : (
-                <Card>
-                    <CardContent className="p-4 bg-muted">
-                        <p className="text-muted-foreground">No recent activity found.</p>
-                    </CardContent>
-                </Card>
-            )}
+                : (
+                    <Card>
+                        <CardContent className="p-4 bg-muted">
+                            <p className="text-muted-foreground">No recent activity found.</p>
+                        </CardContent>
+                    </Card>
+                )}
         </div>
     )
 }
