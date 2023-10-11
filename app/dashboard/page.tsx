@@ -39,7 +39,7 @@ export default async function Page() {
     }
 
     return (
-        <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen">
+        <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen space-y-4">
             <p
                 className="text-2xl font-bold"
             >Greetings, {user?.firstName}!</p>
@@ -54,21 +54,23 @@ export default async function Page() {
                     </span>
                 </p>
             </div>
-            {activities && activities?.length > 0 ?
-                <div
-                    className="flex flex-col gap-2"
-                >
-                    {activities.map((activity, index) => (
-                        <RecentActivityItem key={index} activity={activity} />
-                    ))}
-                </div>
-                : (
-                    <Card>
-                        <CardContent className="p-4 bg-muted">
-                            <p className="text-muted-foreground">No recent activity found.</p>
-                        </CardContent>
-                    </Card>
-                )}
+            <div>
+                {activities && activities?.length > 0 ?
+                    <div
+                        className="flex flex-col gap-2"
+                    >
+                        {activities.map((activity, index) => (
+                            <RecentActivityItem key={index} activity={activity} />
+                        ))}
+                    </div>
+                    : (
+                        <Card>
+                            <CardContent className="p-4 bg-muted">
+                                <p className="text-muted-foreground">No recent activity found.</p>
+                            </CardContent>
+                        </Card>
+                    )}
+            </div>
         </div>
     )
 }
