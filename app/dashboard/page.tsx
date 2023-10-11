@@ -7,7 +7,7 @@ import DeleteAllRecentActivity from "@/components/delete-all-recent-activity";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata = {
-    title: 'Home'
+    title: 'Dashboard'
 }
 
 async function getRecentActivity() {
@@ -25,6 +25,21 @@ export default async function Page() {
     const user = await currentUser();
 
     const activities = await getRecentActivity();
+
+    // delete all recent activity automatically if the first activity is older than 7 days
+    if (activities && activities?.length > 0) {
+        const firstActivity = activities[0]
+        const firstActivityDate = new Date(firstActivity.timestamp)
+        const today = new Date()
+
+        const diffTime = Math.abs(today.getTime() - firstActivityDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays > 7) {
+            await RecentActivityModel.deleteMany({})
+        }
+    }
+
     return (
         <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen">
             <p
@@ -36,13 +51,18 @@ export default async function Page() {
                     className="text-xl font-medium leading-none"
                 >
                     Activity log
+                    <span className="text-xs text-gray-500 font-medium ml-1">
+                        (deletes weekly)
+                    </span>
+                </p>
+                <p>
                 </p>
 
                 {activities && activities?.length > 0 && <DeleteAllRecentActivity />}
             </div>
             {activities && activities?.length > 0 ? <div>
                 <div
-                    className="space-y-4"
+                    className="flex flex-col gap-2"
                 >
                     {activities.map((activity, index) => (
                         <RecentActivityItem key={index} activity={activity} />
