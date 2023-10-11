@@ -69,7 +69,6 @@ export default function JVForm({
         defaultData?.grossProfit ?? 0
     );
 
-    const [error, setError] = useState('');
 
     async function onSubmit(
         e: React.FormEvent<HTMLFormElement>
@@ -87,6 +86,29 @@ export default function JVForm({
                     moreEntries: customEntries,
                     grossProfit
                 });
+                setParty({
+                    name: '',
+                    billing_amount: 0
+                })
+                setSender('')
+                setCreatedAt(new Date())
+                setBroker({
+                    name: '',
+                    vehicle_number: 0,
+                    funds_transfer: 0,
+                    withdrawal: 0
+                })
+                setExpenses({
+                    gate_pass: '',
+                    go_down: 0,
+                    labour: 0,
+                    local: 0,
+                    other_expenses: 0
+                })
+                setConsignments([])
+                setCustomEntries([])
+                setGrossProfit(0)
+
             } else {
                 if (!defaultData?._id) {
                     throw new Error("No id found")
@@ -115,7 +137,6 @@ export default function JVForm({
 
     return (
         <form className="space-y-4" onSubmit={onSubmit}>
-            {error && <ErrorThrower error={error} />}
             <div className="border-b space-y-4 pb-8">
                 <p className="text-sm text-muted-foreground font-semibold">PARTY</p>
                 <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>

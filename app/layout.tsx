@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: {
     default: 'transbiz',
-    template: '%s | transbiz',
+    template: '%s / transbiz',
   }
 }
 

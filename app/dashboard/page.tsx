@@ -7,7 +7,7 @@ import DeleteAllRecentActivity from "@/components/delete-all-recent-activity";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata = {
-    title: 'Dashboard'
+    title: 'Home'
 }
 
 async function getRecentActivity() {
