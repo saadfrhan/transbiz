@@ -45,7 +45,7 @@ const RecentActivityItem = ({ activity }: { activity: IRecentActivity }) => {
                 </div>
                 <div className="flex items-center mt-2 sm:mt-0 gap-1">
                     <div className="text-sm text-gray-500">{getAction()}</div>
-                    <div className="text-sm text-gray-500">{objectName}</div>
+                    <div className="text-sm text-gray-500">a {objectName}</div>
                 </div>
                 <div className="text-sm text-gray-500 flex items-center gap-2 max-sm:pt-1">
                     <Clock size={16} />
