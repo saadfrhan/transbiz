@@ -6,7 +6,7 @@ import RecentActivityModel from '@/lib/models/recent-activity';
 import { currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 
-export async function updateClient(id: string, data: IJournalVoucher) {
+export async function updateJV(id: string, data: IJournalVoucher) {
   try {
     await dbConnect();
     await JournalVoucher.updateOne({ _id: id }, data);

@@ -27,7 +27,7 @@ export default function DeleteAllRecentActivity() {
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete all the recent activity.
+                        This action cannot be undone. This will permanently delete the activity log.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

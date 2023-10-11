@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { Trash2Icon } from 'lucide-react'
-import { deleteClient } from '@/server-actions/delete-jv';
+import { deleteJV } from '@/server-actions/delete-jv';
 import { toast } from 'react-hot-toast';
 
 export default function DeleteButton({
@@ -16,13 +16,13 @@ export default function DeleteButton({
       variant="destructive"
       className="w-full"
       onClick={async () => {
-        const allowed = confirm("Are you sure you want to delete this client?");
+        const allowed = confirm("Are you sure you want to delete this journal voucher?");
         if (allowed) {
           try {
-            await deleteClient(id);
-            toast.success("Client deleted successfully");
+            await deleteJV(id);
+            toast.success("JV deleted successfully");
           } catch (error) {
-            toast.error("Error deleting client");
+            toast.error("Error deleting journal voucher");
           }
         }
       }}

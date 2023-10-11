@@ -1,7 +1,6 @@
 import RecentActivityItem from "@/components/recent-activity-item";
 import dbConnect from "@/lib/db"
 import RecentActivityModel from "@/lib/models/recent-activity";
-import { getGreeting } from "@/lib/utils"
 import { currentUser } from "@clerk/nextjs"
 
 import DeleteAllRecentActivity from "@/components/delete-all-recent-activity";
@@ -30,7 +29,7 @@ export default async function Page() {
         <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen">
             <p
                 className="text-2xl font-bold"
-            >{getGreeting()} {user?.firstName}!</p>
+            >Greetings, {user?.firstName}!</p>
 
             <div className="my-3 flex justify-between items-center">
                 <p

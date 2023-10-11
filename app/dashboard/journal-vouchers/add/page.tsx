@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function Page() {
     return (
-        <div className="container px-3 py-16 space-y-4">
+        <div className="container px-3 py-16 max-sm:py-3 space-y-4">
             <H2>Add a new journal voucher</H2>
             <P>Please fill out the form below to add a new journal voucher.</P>
             <JVForm actionOnSubmit="create" />

@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { H2 } from "@/components/ui/h2";
 import { DatePicker } from "@/components/ui/date-picker";
 import { P } from "@/components/ui/p";
 import { useState } from "react";
@@ -19,7 +18,7 @@ import {
 } from "@/components/ui/select"
 import { IJournalVoucher } from "@/lib/models/journal-voucher";
 import toast from "react-hot-toast";
-import { updateClient } from "@/server-actions/update-client";
+import { updateJV } from "@/server-actions/update-jv";
 
 export default function JVForm({
     defaultData,
@@ -92,7 +91,7 @@ export default function JVForm({
                 if (!defaultData?._id) {
                     throw new Error("No id found")
                 }
-                await updateClient(
+                await updateJV(
                     defaultData?._id,
                     {
                         party,
@@ -119,7 +118,7 @@ export default function JVForm({
             {error && <ErrorThrower error={error} />}
             <div className="border-b space-y-4 pb-8">
                 <p className="text-sm text-muted-foreground font-semibold">PARTY</p>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Name</Label>
                     <Input
                         type="text"
@@ -133,7 +132,7 @@ export default function JVForm({
                         }}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Billing Amount</Label>
                     <Input
                         type="number"
@@ -150,15 +149,17 @@ export default function JVForm({
                 </div>
             </div>
             <div className="border-b space-y-4 pb-8">
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className="flex flex-col gap-2">
                     <Label>Date</Label>
                     <DatePicker
-                        className={`${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}
-                        date={createdAt}
+                        className={`${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}
+                        date={
+                            createdAt
+                        }
                         setDate={setCreatedAt}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Sender</Label>
                     <Input
                         required
@@ -169,7 +170,7 @@ export default function JVForm({
             </div>
             <div className="border-b space-y-4 pb-8">
                 <p className="text-sm text-muted-foreground font-semibold">BROKER</p>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Name</Label>
                     <Input
                         required
@@ -180,7 +181,7 @@ export default function JVForm({
                         }))}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Vehicle Number</Label>
                     <Input
                         required
@@ -192,7 +193,7 @@ export default function JVForm({
                         }))}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Funds Transfer</Label>
                     <Input
                         type="number"
@@ -204,7 +205,7 @@ export default function JVForm({
                         }))}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Withdrawal</Label>
                     <Input
                         type="number"
@@ -220,7 +221,7 @@ export default function JVForm({
             <div className="border-b space-y-4 pb-8">
                 <p className="text-sm text-muted-foreground font-semibold">EXPENSES</p>
 
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Gate Pass</Label>
                     <Select onValueChange={(value) => {
                         setExpenses((prev) => ({
@@ -237,7 +238,7 @@ export default function JVForm({
                         </SelectContent>
                     </Select>
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Go Down</Label>
                     <Input
                         type="number"
@@ -249,7 +250,7 @@ export default function JVForm({
                         }))}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Labour</Label>
                     <Input
 
@@ -262,7 +263,7 @@ export default function JVForm({
                         }))}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Local</Label>
                     <Input
 
@@ -275,7 +276,7 @@ export default function JVForm({
                         }))}
                     />
                 </div>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Other expenses</Label>
                     <Input
 
@@ -291,9 +292,9 @@ export default function JVForm({
             </div>
             <div className="border-b space-y-4 pb-8">
                 <p className="text-sm text-muted-foreground font-semibold">CONTAINER/CARGO</p>
-                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+                <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                     <Label>Consignments</Label>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col w-full">
                         <div className="flex flex-col gap-2">
                             {
                                 consignments.map((consignment, index) => (
@@ -302,7 +303,7 @@ export default function JVForm({
                                         key={index}
                                     >
                                         <div
-                                            className="flex flex-col gap-2"
+                                            className="flex flex-col gap-2 w-full"
                                         >
                                             <div
                                                 className="flex items-center gap-4 w-full"
@@ -356,14 +357,14 @@ export default function JVForm({
                     {
                         customEntries.map((customEntry, index) => (
                             <div
-                                className="flex items-center gap-5 w-fit"
+                                className="flex items-center gap-5 w-fit max-sm:w-full"
                                 key={index}
                             >
                                 <div
-                                    className="flex flex-col gap-2"
+                                    className="flex flex-col gap-2 w-full"
                                 >
                                     <div
-                                        className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}
+                                        className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}
                                     >
                                         <Label>{
                                             customEntries[index] && Object.keys(customEntries[index])[0]
@@ -413,7 +414,7 @@ export default function JVForm({
                     Add custom entry
                 </Button>
             </div>
-            <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px]'}`}>
+            <div className={`flex flex-col gap-2 ${actionOnSubmit === "update" ? 'w-full' : 'w-[280px] max-sm:w-full'}`}>
                 <Label>Gross Profit</Label>
                 <Input
 
@@ -425,8 +426,7 @@ export default function JVForm({
             </div>
             <Button
                 type="submit"
-                className={`${actionOnSubmit === "update" ? 'w-full' : 'w-fit'}`}
-            >
+                className={`${actionOnSubmit === "update" ? 'w-full' : 'w-fit max-sm:w-full'}`}>
                 {actionOnSubmit === "create" ? "Create" : "Update"}
             </Button>
         </form>

@@ -1,4 +1,5 @@
 import Navbar from '@/components/layout/navbar'
+import ScrollToTopButton from '@/components/layout/scroll-top-button'
 import Statusbar from '@/components/status-bar'
 import ThemeToggler from '@/components/theme-toggler'
 import dbConnect from '@/lib/db'
@@ -22,7 +23,7 @@ export default async function Layout(
             <div
                 className="flex px-5 py-5 max-lg:px-2.5 max-lg:py-2.5 border-b items-center justify-between gap-2.5"
             >
-                <div className='flex gap-4'>
+                <div className='flex gap-4 max-lg:gap-2'>
                     <Navbar />
                     <ThemeToggler />
                 </div>
@@ -33,6 +34,7 @@ export default async function Layout(
                 }} />
             </div>
             {children}
+            <ScrollToTopButton />
             <Statusbar jvs_count={jvs_count}
             />
         </div>

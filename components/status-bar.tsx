@@ -1,6 +1,5 @@
 "use client"
 
-import { getGreeting } from '@/lib/utils';
 import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
 import Refresh from './refresh';
@@ -41,9 +40,7 @@ export default function Statusbar({
                 }`}
         >
             <div className='flex gap-2 items-center'>
-                <h2 className="text-muted-foreground">{getGreeting()} {
-                    user?.firstName
-                }! </h2>
+                {user && <h2 className="text-muted-foreground">Greetings, {user?.firstName}! </h2>}
                 <Refresh>
                     <TooltipComponent label='Refresh'>
                         <RefreshCcw className='text-muted-foreground w-4 h-4 cursor-pointer hover:text-foreground duration-300' />

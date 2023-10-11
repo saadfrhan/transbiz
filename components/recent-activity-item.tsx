@@ -8,14 +8,18 @@ import { Card, CardContent } from './ui/card';
 const RecentActivityItem = ({ activity }: { activity: IRecentActivity }) => {
     const { action, objectName, timestamp, user } = activity;
 
-    const getIcon = () => {
+    const getAction = () => {
         switch (action) {
             case 'Created':
-                return <Plus size={24} className="text-green-500" />;
+                return <p
+                    className="text-green-500"
+                >
+                    Created
+                </p>;
             case 'Updated':
-                return <Pencil size={24} className="text-blue-500" />;
+                return <p className="text-blue-500">Updated</p>;
             case 'Deleted':
-                return <Trash size={24} className="text-red-500" />;
+                return <p className="text-red-500">Deleted</p>;
             default:
                 return null;
         }
@@ -39,15 +43,17 @@ const RecentActivityItem = ({ activity }: { activity: IRecentActivity }) => {
                         <p className="text-sm text-gray-500">{user.email}</p>
                     </div>
                 </div>
-                <div className="flex items-center mt-2 sm:mt-0">
-                    <div className="text-sm text-gray-500 mr-2">{getIcon()}</div>
+                <div className="flex items-center mt-2 sm:mt-0 gap-1">
+                    <div className="text-sm text-gray-500">{getAction()}</div>
                     <div className="text-sm text-gray-500">{objectName}</div>
                 </div>
-                <div className="text-sm text-gray-500 flex items-center max-sm:pt-3">
-                    <Clock size={16} className="mr-1 inline" />
-                    {formatDistance(new Date(timestamp), new Date(), {
-                        addSuffix: true,
-                    })}
+                <div className="text-sm text-gray-500 flex items-center gap-2 max-sm:pt-1">
+                    <Clock size={16} />
+                    <p>
+                        {formatDistance(new Date(timestamp), new Date(), {
+                            addSuffix: true,
+                        })}
+                    </p>
                 </div>
             </CardContent>
         </Card>

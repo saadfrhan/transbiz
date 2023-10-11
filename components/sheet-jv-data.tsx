@@ -10,33 +10,11 @@ import {
 } from "@/components/ui/sheet"
 import { IJournalVoucher } from "@/lib/models/journal-voucher"
 import { Separator } from "./ui/separator"
-import { P } from "./ui/p"
 import DeleteButton from "./delete-button"
 import { ArrowLeftIcon, Pencil } from "lucide-react"
 import { Button } from "./ui/button"
 import { useState } from "react";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { DatePicker } from "./ui/date-picker";
-import ErrorThrower from "./error-thrower";
-import { updateClient } from "@/server-actions/update-client";
-import { toast } from "react-hot-toast";
 import JVForm from "./jv-form";
-
-// export interface IJournalVoucher {
-//   _id?: string;
-//   party: IParty;
-//   createdAt: Date;
-//   updatedAt?: Date;
-//   sender: string;
-//   broker: IBroker;
-//   expenses: IExpenses;
-//   consignments: string[];
-//   moreEntries?: {
-//     [x: string]: any;
-//   }[]; // Adjust the type as needed for moreEntries
-//   grossProfit: number;
-// }
 
 export function SheetJVData({
   children,
@@ -78,7 +56,7 @@ export function SheetJVData({
               <ArrowLeftIcon className="w-4 h-4" />
             </Button>}
 
-            {isUpdating ? "Update Journal Voucher" : "Details"}
+            {isUpdating ? "Update JV" : "Details"}
 
           </SheetTitle>
         </SheetHeader>

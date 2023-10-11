@@ -6,7 +6,7 @@ import RecentActivityModel from '@/lib/models/recent-activity';
 import { currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 
-export async function deleteClient(id: string) {
+export async function deleteJV(id: string) {
   try {
     await dbConnect();
     await JournalVoucher.deleteOne({

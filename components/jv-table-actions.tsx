@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { AlertDialogTrigger } from '@radix-ui/react-alert-dialog';
 import { MoreHorizontal } from 'lucide-react'
 
-export default function ClientTableActions(
+export default function JVTableActions(
 	{ id }: { id: string }
 ) {
 	return (<>
