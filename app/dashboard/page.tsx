@@ -24,18 +24,8 @@ export default async function Page() {
 
     const activities = await getRecentActivity();
 
-    // delete all recent activity automatically if the first activity is older than 7 days
-    if (activities && activities?.length > 0) {
-        const firstActivity = activities[0]
-        const firstActivityDate = new Date(firstActivity.timestamp)
-        const today = new Date()
-
-        const diffTime = Math.abs(today.getTime() - firstActivityDate.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        if (diffDays > 7) {
-            await RecentActivityModel.deleteMany({})
-        }
+    if (new Date().getDay() === 1) {
+        await RecentActivityModel.deleteMany({})
     }
 
     return (
@@ -50,7 +40,7 @@ export default async function Page() {
                 >
                     Activity log
                     <span className="text-xs text-gray-500 font-medium ml-1">
-                        (deletes weekly)
+                        (deletes every Monday)
                     </span>
                 </p>
             </div>

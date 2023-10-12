@@ -4,6 +4,7 @@ import Refresh from "@/components/refresh";
 import TableSearch from "@/components/table-search";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { H2 } from "@/components/ui/h2";
+import { P } from "@/components/ui/p";
 import dbConnect from "@/lib/db";
 import jv, { IJournalVoucher } from "@/lib/models/journal-voucher";
 import { PlusCircleIcon, PlusIcon, RefreshCw } from "lucide-react";
@@ -78,6 +79,7 @@ export default async function Page(
         result && typeof result !== 'string' && result.length > 0
           ? <>
             <TableSearch />
+            {search && <P className="pt-4">Search JVs whose party's name matches "{search}" </P>}
             <JVs jvs={result} />
             <Pagination totalPageCount={totalPageCount ?? 0} currentPage={page} />
           </>
