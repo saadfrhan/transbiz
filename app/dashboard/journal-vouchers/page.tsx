@@ -56,7 +56,7 @@ export default async function Page(
   )
 
   return (
-    <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen">
+    <div className="lg:container lg:p-5 max-lg:p-2 h-min-screen pb-5 max-lg:pb-2.5">
       <div
         className="flex w-full max-sm:flex-col justify-between pt-5 max-lg:pt-2.5 pr-2.5"
       >
