@@ -79,7 +79,7 @@ export default async function Page(
         result && typeof result !== 'string' && result.length > 0
           ? <>
             <TableSearch />
-            {search && <P className="pt-4">Search JVs whose party's name matches "{search}" </P>}
+            {search && <P className="pt-4">Search JVs whose party&#39;s name matches "{search}" </P>}
             <JVs jvs={result} />
             <Pagination totalPageCount={totalPageCount ?? 0} currentPage={page} />
           </>
